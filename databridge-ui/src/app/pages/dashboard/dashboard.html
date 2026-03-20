@@ -1,2 +1,24 @@
-<h2>Welcome {{ user?.name }}</h2>
-<p>Email: {{ user?.email }}</p>
+<div class="min-h-screen bg-slate-900 text-slate-100">
+  <header class="flex items-center justify-between px-8 py-4 border-b border-slate-700 bg-slate-900/80">
+    <h1 class="text-xl font-semibold">Databridge Dashboard</h1>
+    <button
+      (click)="logout()
+"
+      class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium"
+    >
+      Logout
+    </button>
+  </header>
+
+  <main class="p-8">
+    <div class="grid gap-6 md:grid-cols-3">
+      <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4">
+        <h2 class="text-lg font-semibold mb-2">Welcome</h2>
+        <p class="text-sm text-slate-300">
+          This is where your Databridge AI widgets, stats, and data cards will live.
+        </p>
+      </div>
+      <!-- You can add more cards here later -->
+    </div>
+  </main>
+</div>

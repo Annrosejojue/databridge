@@ -6,24 +6,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-
-  private apiUrl = 'http://127.0.0.1:8000/users';
+  private baseUrl = 'http://127.0.0.1:8000/auth';
 
   constructor(private http: HttpClient) {}
 
   signup(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, data);
+    return this.http.post(`${this.baseUrl}/signup`, data);
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, data);
+    return this.http.post(`${this.baseUrl}/login`, data);
   }
 
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
 
-  getToken() {
+  getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
   }
 }

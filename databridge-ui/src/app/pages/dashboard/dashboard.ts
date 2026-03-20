@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.html',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
+  constructor(private auth: AuthService, private router: Router) {}
 
-  user: any;
-
-  constructor(private http: HttpClient, private auth: AuthService) {}
-
-  ngOnInit() {
-    const token = this.auth.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    this.http.get('http://127.0.0.1:8000/users/me', { headers })
-      .subscribe(res => this.user = res);
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 
 @Component({
@@ -12,15 +13,27 @@ export class SignupComponent {
   form = {
     email: '',
     name: '',
-    password: ''
+    password: '',
   };
 
-  constructor(private auth: AuthService) {}
+  loading = false;
+  error: string | null = null;
+
+  constructor(private auth: AuthService, private router: Router) {}
 
   submit() {
+    this.loading = true;
+    this.error = null;
+
     this.auth.signup(this.form).subscribe({
-      next: () => alert('Signup successful'),
-      error: () => alert('Signup failed')
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.loading = false;
+        this.error = 'Signup failed. Try again.';
+      },
     });
   }
 }

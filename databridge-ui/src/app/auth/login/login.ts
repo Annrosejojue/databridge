@@ -12,18 +12,28 @@ import { AuthService } from '../../services/auth';
 export class LoginComponent {
   form = {
     email: '',
-    password: ''
+    password: '',
   };
+
+  loading = false;
+  error: string | null = null;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   submit() {
+    this.loading = true;
+    this.error = null;
+
     this.auth.login(this.form).subscribe({
       next: (res: any) => {
         this.auth.saveToken(res.access_token);
+        this.loading = false;
         this.router.navigate(['/dashboard']);
       },
-      error: () => alert('Invalid credentials')
+      error: () => {
+        this.loading = false;
+        this.error = 'Invalid email or password';
+      },
     });
   }
 }
