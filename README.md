@@ -10,4 +10,20 @@ Features
 - Ready for Alembic migrations
 - Production‑friendly architecture
 
+A simple Angular + TailwindCSS frontend for the Databridge project.
+This UI includes login, signup, and dashboard pages, connected through Angular routing and styled with TailwindCSS.
+
+Tech Stack
+Angular 17
+TailwindCSS
+TypeScript
+FastAPI backend (API integration)
+
+Features
+Login & Signup pages
+Dashboard layout
+Token-based authentication (JWT)
+TailwindCSS styling
+
+
 
