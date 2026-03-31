@@ -8,8 +8,10 @@ from app.schemas.user import UserLogin
 from app.core.auth import verify_password, create_access_token
 from app.core.auth import hash_password
 from app.core.deps import get_current_user
+from fastapi import HTTPException
 
-router = APIRouter(prefix="/users", tags=["Users"])
+
+router = APIRouter(prefix="/auth", tags=["Auth"])
 
 def get_db():
     db = SessionLocal()
