@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,10 +14,9 @@ export class FileUploadService {
     const formData = new FormData();
     formData.append('file', file);
 
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
+    return this.http.post(`${this.baseUrl}/upload`, formData, {
       reportProgress: true,
+      observe: 'events'
     });
-
-    return this.http.request(req);
   }
 }

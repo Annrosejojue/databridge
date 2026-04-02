@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FileUploadService } from '../../services/file-upload';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    HttpClientModule
+  ],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
@@ -19,10 +23,12 @@ export class DashboardComponent {
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
+
     if (!input.files || input.files.length === 0) {
       this.selectedFile = null;
       return;
     }
+
     this.selectedFile = input.files[0];
     this.error = null;
     this.uploadResult = null;
@@ -40,9 +46,13 @@ export class DashboardComponent {
 
     this.fileUploadService.uploadFile(this.selectedFile).subscribe({
       next: (event: any) => {
+        // Upload progress
         if (event.type === 1 && event.total) {
           this.uploadProgress = Math.round((100 * event.loaded) / event.total);
-        } else if (event.body) {
+        }
+
+        // Final response
+        if (event.body) {
           this.uploadResult = event.body;
           this.uploadProgress = 100;
         }
@@ -50,7 +60,7 @@ export class DashboardComponent {
       error: () => {
         this.error = 'File upload failed. Please try again.';
         this.uploadProgress = null;
-      },
+      }
     });
   }
 }
