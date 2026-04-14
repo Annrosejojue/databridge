@@ -1,11 +1,16 @@
 import { Routes } from '@angular/router';
-import { SignupComponent } from './auth/signup/signup';
 import { LoginComponent } from './auth/login/login';
+import { SignupComponent } from './auth/signup/signup';
 import { DashboardComponent } from './pages/dashboard/dashboard';
+// Added these imports to fix the red squiggles in the routes array
+import { AnalyticsComponent } from './pages/analytics/analytics';
+import { ProfileComponent } from './pages/profile/profile';
 
 export const routes: Routes = [
-  { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'analytics', component: AnalyticsComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

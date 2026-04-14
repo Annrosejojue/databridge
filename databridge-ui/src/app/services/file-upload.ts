@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FileUploadService {
-  private baseUrl = 'http://127.0.0.1:8000';
+  // Pointing to the /api prefix used in your FastAPI routers
+  private baseUrl = 'http://127.0.0.1:8000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -18,5 +19,10 @@ export class FileUploadService {
       reportProgress: true,
       observe: 'events'
     });
+  }
+
+  // This fixes the red squiggle in analytics.ts
+  getAnalyses(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/analyses`);
   }
 }

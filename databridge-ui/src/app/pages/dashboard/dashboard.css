@@ -23,18 +23,19 @@
 }
 
 .upload-btn {
-  background: #4a90e2;
+  background-color: #5e5ce6;
   color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
   border: none;
-  padding: 10px 18px;
-  border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-weight: bold;
 }
 
 .upload-btn:disabled {
-  background: #b0c4de;
+  background-color: #cccccc !important;
   cursor: not-allowed;
+  color: #666666;
 }
 
 .progress {

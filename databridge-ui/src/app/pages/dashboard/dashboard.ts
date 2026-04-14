@@ -1,66 +1,37 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { FileUploadService } from '../../services/file-upload';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    CommonModule,
-    HttpClientModule
-  ],
-  templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css']
+  imports: [CommonModule],
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.css'
 })
 export class DashboardComponent {
   selectedFile: File | null = null;
-  uploadProgress: number | null = null;
   uploadResult: any = null;
-  error: string | null = null;
+  loading = false;
 
-  constructor(private fileUploadService: FileUploadService) {}
+  constructor(private fileService: FileUploadService) {}
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-
-    if (!input.files || input.files.length === 0) {
-      this.selectedFile = null;
-      return;
-    }
-
-    this.selectedFile = input.files[0];
-    this.error = null;
-    this.uploadResult = null;
-    this.uploadProgress = null;
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
   }
 
   upload() {
-    if (!this.selectedFile) {
-      this.error = 'Please select a file first.';
-      return;
-    }
-
-    this.error = null;
-    this.uploadProgress = 0;
-
-    this.fileUploadService.uploadFile(this.selectedFile).subscribe({
+    if (!this.selectedFile) return;
+    this.loading = true;
+    this.fileService.uploadFile(this.selectedFile).subscribe({
       next: (event: any) => {
-        // Upload progress
-        if (event.type === 1 && event.total) {
-          this.uploadProgress = Math.round((100 * event.loaded) / event.total);
-        }
-
-        // Final response
-        if (event.body) {
+        if (event instanceof HttpResponse) {
           this.uploadResult = event.body;
-          this.uploadProgress = 100;
+          this.loading = false;
         }
       },
-      error: () => {
-        this.error = 'File upload failed. Please try again.';
-        this.uploadProgress = null;
-      }
+      error: () => { this.loading = false; alert("Upload failed!"); }
     });
   }
 }

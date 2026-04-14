@@ -1,0 +1,26 @@
+<div class="card" style="padding: 40px; background: white; border-radius: 12px; color: #333;">
+  <h2>Step 1: Select your Business Data</h2>
+  
+  <div style="background: #f1f5f9; padding: 30px; border-radius: 8px; border: 2px dashed #cbd5e1; text-align: center;">
+    <input type="file" (change)="onFileSelected($event)" style="display: block; margin: 0 auto 20px auto;" />
+
+    <div *ngIf="selectedFile" style="color: #10b981; font-weight: bold; margin-bottom: 20px;">
+      Selected: {{ selectedFile.name }}
+    </div>
+
+    <button 
+      (click)="upload()" 
+      [disabled]="!selectedFile"
+      style="background: #6366f1; color: white; border: none; padding: 12px 30px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+      Analyze Document
+    </button>
+  </div>
+
+  <div *ngIf="uploadResult" style="margin-top: 30px; padding: 20px; background: #0f172a; color: white; border-radius: 8px;">
+    <h3>AI Analysis Complete</h3>
+    <p>Maturity Score: {{ uploadResult.maturity_score }}%</p>
+    <ul>
+      <li *ngFor="let rec of uploadResult.recommendations">{{ rec }}</li>
+    </ul>
+  </div>
+</div>

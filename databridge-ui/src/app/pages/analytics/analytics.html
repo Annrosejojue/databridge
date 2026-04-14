@@ -1,0 +1,31 @@
+<div class="card">
+  <h1>Business Analysis History</h1>
+  <p>Review all past data maturity diagnoses.</p>
+
+  <div *ngIf="loading" class="loader">Loading history...</div>
+
+  <table *ngIf="!loading && history.length > 0" class="history-table">
+    <thead>
+      <tr>
+        <th>Filename</th>
+        <th>Maturity Score</th>
+        <th>Key Recommendations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of history">
+        <td>{{ item.filename }}</td>
+        <td>
+            <span class="score-pill" [style.background]="item.maturity_score > 70 ? '#10b981' : '#f59e0b'">
+                {{ item.maturity_score }}%
+            </span>
+        </td>
+        <td>{{ item.recommendations.join(', ') }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && history.length === 0" class="empty-state">
+    No analyses found. Go to the Dashboard to upload your first file!
+  </div>
+</div>

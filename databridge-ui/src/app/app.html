@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<div style="display: flex; min-height: 100vh;">
+  <app-sidebar *ngIf="showSidebar" style="width: 250px; position: fixed; height: 100vh;"></app-sidebar>
+  
+  <main [style.margin-left]="showSidebar ? '250px' : '0'" style="flex: 1; padding: 40px; background: #0f172a;">
+    <router-outlet></router-outlet>
+  </main>
+</div>
