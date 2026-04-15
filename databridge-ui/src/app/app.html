@@ -1,7 +1,9 @@
-<div style="display: flex; min-height: 100vh;">
-  <app-sidebar *ngIf="showSidebar" style="width: 250px; position: fixed; height: 100vh;"></app-sidebar>
+<div class="app-container" style="display: flex; width: 100vw; height: 100vh; overflow: hidden;">
   
-  <main [style.margin-left]="showSidebar ? '250px' : '0'" style="flex: 1; padding: 40px; background: #0f172a;">
+  <app-sidebar *ngIf="showSidebar" style="width: 250px; flex-shrink: 0; z-index: 100;"></app-sidebar>
+  
+  <div class="main-content" style="flex-grow: 1; height: 100vh; overflow-y: auto; background: #0f172a; position: relative;">
     <router-outlet></router-outlet>
-  </main>
+  </div>
+
 </div>
