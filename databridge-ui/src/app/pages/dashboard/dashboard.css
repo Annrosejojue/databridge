@@ -1,57 +1,128 @@
+/* Main Layout Container */
 .dashboard-wrapper {
   display: flex;
   justify-content: center;
-  padding: 40px;
-  background: #f5f7fa;
+  align-items: flex-start; /* Keeps the card at the top on small screens */
+  padding: 60px 20px;
+  background: #0f172a; /* Matching your dark theme sidebar */
   min-height: 100vh;
 }
 
-.dashboard-card {
+/* The Main Container Card */
+.main-card {
   background: white;
-  padding: 30px;
-  width: 500px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 650px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   text-align: center;
+  color: #1e293b;
 }
 
-.upload-box {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: #0f172a;
 }
 
-.upload-btn {
-  background-color: #5e5ce6;
-  color: white;
-  padding: 10px 25px;
-  border-radius: 8px;
-  border: none;
+.subtitle {
+  color: #64748b;
+  margin-bottom: 30px;
+}
+
+/* The Large Upload Zone (Clickable Area) */
+.upload-zone {
+  border: 3px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 50px 20px;
+  background: #f8fafc;
   cursor: pointer;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
 }
 
-.upload-btn:disabled {
-  background-color: #cccccc !important;
+.upload-zone:hover {
+  border-color: #6366f1;
+  background: #f5f3ff;
+  transform: translateY(-2px);
+}
+
+/* When a file is selected, the box turns green */
+.upload-zone.file-ready {
+  border-color: #10b981;
+  background: #ecfdf5;
+}
+
+.icon {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* The Large Analyze Button */
+.analyze-btn {
+  width: 100%;
+  padding: 18px;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  transition: all 0.2s ease;
+}
+
+.analyze-btn:hover:not(:disabled) {
+  background: #4f46e5;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+}
+
+.analyze-btn:disabled {
+  background: #94a3b8;
+  box-shadow: none;
   cursor: not-allowed;
-  color: #666666;
+  opacity: 0.7;
 }
 
-.progress {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.error {
-  color: red;
-  margin-top: 10px;
-}
-
-.result-box {
-  margin-top: 25px;
-  text-align: left;
-  background: #f0f4ff;
+/* Error Message Banner */
+.error-banner {
+  margin-top: 20px;
   padding: 15px;
+  background: #fee2e2;
+  color: #b91c1c;
   border-radius: 8px;
+  border: 1px solid #fecaca;
+  font-weight: 500;
+}
+
+/* JSON Result Box */
+.result-box {
+  margin-top: 30px;
+  text-align: left;
+  background: #0f172a; /* Dark background for code look */
+  color: #818cf8;
+  padding: 20px;
+  border-radius: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  overflow-x: auto;
+}
+
+.result-box h3 {
+  color: white;
+  margin-top: 0;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 10px;
+}
+
+/* Animations */
+.animate-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
